@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chess Game</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    
+    .chessboard {
+      width: 480px;
+      height: 480px;
+      margin: 50px auto;
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+    }
+    
+    .cell {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    
+    .cell:nth-child(odd) {
+      background-color: #f8f8f8;
+    }
+    
+    .cell:nth-child(even) {
+      background-color: #d0d0d0;
+    }
+    
+    .piece {
+      width: 80%;
+      height: 80%;
+    }
+  </style>
+</head>
+<body>
+  <div class="chessboard">
+    <!-- Board representation and initial pieces -->
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <!-- ... (repeat for all cells) -->
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+  </div>
+
+  <script>
+    // Board representation
+    const board = [
+      // Each value represents a piece on the board:
+      // 'r' -> black rook, 'n' -> black knight, 'b' -> black bishop, 'q' -> black queen,
+      // 'k' -> black king, 'p' -> black pawn, 'R' -> white rook, 'N' -> white knight,
+      // 'B' -> white bishop, 'Q' -> white queen, 'K' -> white king, 'P' -> white pawn,
+      // null -> empty cell
+      ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'],
+      ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p'],
+      [null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null],
+      [null, null, null, null, null, null, null, null],
+      ['P', 'P', 'P', 'P', 'P', 'P', 'P', 'P'],
+      ['R', 'N', 'B', 'Q', 'K', 'B', 'N', 'R']
+    ];
+
+    // Function to render the board on the UI
+    function renderBoard() {
+      const chessboard = document.querySelector('.chessboard');
+      chessboard.innerHTML = '';
+
+      for (let i = 0; i < board.length; i++) {
+        for (let j = 0; j < board[i].length; j++) {
+          const cell = document.createElement('div');
+          cell.classList.add('cell');
+          
+          if ((i
+          if ((i + j) % 2 === 0) {
+            cell.style.backgroundColor = '#d0d0d0';
+          } else {
+            cell.style.backgroundColor = '#f8f8f8';
+          }
+
+          const piece = document.createElement('div');
+          piece.classList.add('piece');
+          const pieceType = board[i][j];
+
+          if (pieceType) {
+            piece.textContent = pieceType;
+          }
+
+          cell.appendChild(piece);
+          chessboard.appendChild(cell);
+        }
+      }
+    }
+
+    // Function to handle player input
+    function handleCellClick(row, col) {
+      // Implement logic to handle the click on a specific cell
+      // e.g., move the piece, check for valid moves, etc.
+    }
+
+    // Add event listeners to the cells
+    const cells = document.querySelectorAll('.cell');
+    cells.forEach((cell, index) => {
+      const row = Math.floor(index / 8);
+      const col = index % 8;
+      cell.addEventListener('click', () => handleCellClick(row, col));
+    });
+
+    // Initial rendering of the board
+    renderBoard();
+  </script>
+</body>
+</html>
